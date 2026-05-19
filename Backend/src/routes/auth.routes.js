@@ -10,9 +10,9 @@ authRouter.post('/register', registerController);
 authRouter.post('/login', loginController);
 
 // /api/auth/logout
-authRouter.post('/logout', logoutController);
+authRouter.get('/logout', logoutController);
 
 // /api/auth/get-me
-authRouter.post('/get-me', verifyToken, getMeController);
+authRouter.get('/get-me', verifyToken, getMeController);
 
 export default authRouter;
