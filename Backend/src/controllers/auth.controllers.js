@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import config from "../configs/config.js";
 
+// api/auth/register
 export const registerController = async (req, res) => {
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
@@ -31,6 +32,7 @@ export const registerController = async (req, res) => {
     });
 }
 
+// api/auth/login
 export const loginController = async (req, res) => {
     const { info, password } = req.body;
     if (!info || !password) {
@@ -60,19 +62,21 @@ export const loginController = async (req, res) => {
     });
 }
 
-export const logoutController = (req, res) => {
+// api/auth/logout
+export const logoutController = async (req, res) => {
     const token = req.cookies.token;
     if (!token) {
         return res.status(400).json({ message: "No token provided" });
     }
 
-    TokenBlacklist.create({ token });
+    await TokenBlacklist.create({ token });
     
     res.clearCookie('token');
     return res.status(200).json({ message: "Logout successful" });
 }
 
-export const getMeController = async (req, res) => {
+// api/auth/get-me
+export const getMeController = (req, res) => {
     const user = req.user;
     return res.status(200).json({
         message: "User retrieved successfully",

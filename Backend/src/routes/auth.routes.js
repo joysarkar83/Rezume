@@ -12,7 +12,7 @@ authRouter.post('/login', loginController);
 // /api/auth/logout
 authRouter.post('/logout', logoutController);
 
-// /api/auth/getMe
-authRouter.post('/getMe', verifyToken, getMeController);
+// /api/auth/get-me
+authRouter.post('/get-me', verifyToken, getMeController);
 
 export default authRouter;
